@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:roster/roster.dart';
 
 void main() {
   runApp(const MaterialApp(home: RosterDemo()));
@@ -9,6 +10,10 @@ class RosterDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Text('RosterDemo'));
+    return const Scaffold(
+      body: RosterWidget(
+        blocks: [],
+      ),
+    );
   }
 }

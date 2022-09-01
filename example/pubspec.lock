@@ -55,6 +55,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_date_time_picker:
+    dependency: transitive
+    description:
+      path: "."
+      ref: stable
+      resolved-ref: "7a3c66d28c2d29c1983d186435ed559a19fe34ff"
+      url: "git@github.com:Iconica-Development/flutter_date_time_picker.git"
+    source: git
+    version: "0.0.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -67,6 +76,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
   lints:
     dependency: transitive
     description:
@@ -156,6 +172,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
+  timetable:
+    dependency: transitive
+    description:
+      path: "."
+      ref: "v0.0.2"
+      resolved-ref: "62fdaa443818bd646058b536a12304725d1619fd"
+      url: "git@github.com:Iconica-Development/timetable.git"
+    source: git
+    version: "0.0.1"
   vector_math:
     dependency: transitive
     description:
@@ -165,4 +190,4 @@ packages:
     version: "2.1.2"
 sdks:
   dart: ">=2.18.0 <3.0.0"
-  flutter: ">=1.17.0"
+  flutter: ">=2.0.0"
