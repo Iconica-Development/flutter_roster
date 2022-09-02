@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_date_time_picker/flutter_date_time_picker.dart';
-import 'package:roster/src/models/roster_event.dart';
-import 'package:roster/src/models/roster_theme.dart';
+import 'package:flutter_roster/src/models/roster_event.dart';
+import 'package:flutter_roster/src/models/roster_theme.dart';
 import 'package:timetable/timetable.dart';
 
 class RosterWidget extends StatefulWidget {
+  /// [RosterWidget] is a widget that displays a timetable with events.
+  /// It is stateful and sorts the events based on the selected date.
+  /// All styling can be configured through the [RosterTheme] class.
   const RosterWidget({
     required this.blocks,
     this.highlightedDates = const [],
@@ -54,10 +57,10 @@ class RosterWidget extends StatefulWidget {
   /// The heigh of one hour in the timetable.
   final double hourHeight;
 
-  /// The width of the agendaItem if there is no child
+  /// The width of the rosterItem if there is no child
   final double blockWidth;
 
-  /// The color of the agendaItem if there is no child
+  /// The color of the rosterItem if there is no child
   final Color blockColor;
 
   /// The theme used by the roster.

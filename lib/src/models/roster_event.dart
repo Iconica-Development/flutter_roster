@@ -16,7 +16,7 @@ class RosterEvent {
   /// The end time of the event.
   final DateTime end;
 
-  ///
+  /// The [Widget] displayed inside the roster at the event time
   final Widget? content;
 
   /// The identifier of the event that is used to combine events
