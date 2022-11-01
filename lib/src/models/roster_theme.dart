@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Iconica
+//
+// SPDX-License-Identifier: BSD-3-Clause
+
 import 'package:flutter_date_time_picker/flutter_date_time_picker.dart';
 import 'package:timetable/timetable.dart';
 
