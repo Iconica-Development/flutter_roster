@@ -14,6 +14,7 @@ class RosterWidget extends StatefulWidget {
   /// All styling can be configured through the [RosterTheme] class.
   const RosterWidget({
     required this.blocks,
+    this.tableDirection = Axis.vertical,
     this.highlightedDates = const [],
     this.disabledDates = const [],
     this.initialDate,
@@ -23,7 +24,7 @@ class RosterWidget extends StatefulWidget {
     this.onTapDay,
     this.startHour = 0,
     this.endHour = 24,
-    this.hourHeight = 80,
+    this.hourDimension = 80,
     this.highlightToday = true,
     this.blockWidth = 50,
     this.blockColor = const Color(0x80FF0000),
@@ -31,7 +32,10 @@ class RosterWidget extends StatefulWidget {
     super.key,
   });
 
-  /// Header widget that is displayed above the datepicker.
+  /// The [Axis] along which the timetable markings are lined out
+  final Axis tableDirection;
+
+  /// Header widget that is displayed above the datepicker
   final Widget? header;
 
   /// The blocks that are displayed in the roster
@@ -58,8 +62,8 @@ class RosterWidget extends StatefulWidget {
   /// Hour at which the timetable ends.
   final int endHour;
 
-  /// The heigh of one hour in the timetable.
-  final double hourHeight;
+  /// The dimension in pixels of one hour in the timetable.
+  final double hourDimension;
 
   /// The width of the rosterItem if there is no child
   final double blockWidth;
@@ -111,7 +115,7 @@ class _RosterWidgetState extends State<RosterWidget> {
         scrollController: widget.scrollController,
         blockColor: widget.blockColor,
         blockWidth: widget.blockWidth,
-        hourHeight: widget.hourHeight,
+        hourDimension: widget.hourDimension,
         startHour: widget.startHour,
         endHour: widget.endHour,
         timeBlocks: events,
