@@ -111,6 +111,7 @@ class _RosterWidgetState extends State<RosterWidget> {
       markedDates: widget.highlightedDates,
       dateTimePickerTheme: widget.theme.timePickerTheme,
       child: Timetable(
+        tableDirection: widget.tableDirection,
         scrollPhysics: widget.scrollPhysics,
         scrollController: widget.scrollController,
         blockColor: widget.blockColor,
@@ -152,6 +153,7 @@ class _RosterWidgetState extends State<RosterWidget> {
                     minute: e.end.minute,
                   ),
             id: e.id ?? 0,
+            childDimension: e.childDimension,
             child: e.content,
           ),
         )
