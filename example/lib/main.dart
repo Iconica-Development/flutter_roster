@@ -25,12 +25,12 @@ class RosterDemo extends StatelessWidget {
               children: [
                 Text(
                   'Team Rooster',
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const Spacer(),
                 Text(
                   'Persoonlijk Rooster',
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
             ),
@@ -94,6 +94,13 @@ class RosterDemo extends StatelessWidget {
           theme: const RosterTheme(
             tableTheme: TableTheme(
               blockPaddingBetween: 10,
+            ),
+            timePickerTheme: DateTimePickerTheme(
+              barTheme: DateTimePickerBarTheme(
+                barColor: Colors.blue,
+                barOpacity: 1,
+                barHeight: 5,
+              ),
             ),
           ),
         ),
