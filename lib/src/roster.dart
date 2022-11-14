@@ -153,6 +153,7 @@ class _RosterWidgetState extends State<RosterWidget> {
                     minute: e.end.minute,
                   ),
             id: e.id ?? 0,
+            childDimension: e.childDimension,
             child: e.content,
           ),
         )
