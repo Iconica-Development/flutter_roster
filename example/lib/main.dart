@@ -12,6 +12,9 @@ void main() {
 class RosterDemo extends StatelessWidget {
   const RosterDemo({Key? key}) : super(key: key);
 
+  static const String teamRoster = 'Team Rooster';
+  static const String personalRoster = 'Persoonlijk rooster';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +26,14 @@ class RosterDemo extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Text(
-                  'Team Rooster',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                const Text(
+                  teamRoster,
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
-                Text(
-                  'Persoonlijk Rooster',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                const Text(
+                  personalRoster,
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
