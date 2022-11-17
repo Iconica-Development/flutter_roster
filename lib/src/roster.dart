@@ -103,6 +103,10 @@ class _RosterWidgetState extends State<RosterWidget> {
       highlightToday: widget.highlightToday,
       header: widget.header,
       onTapDay: (selected) {
+        if (widget.onTapDay != null) {
+          widget.onTapDay!(selected);
+        }
+
         setState(() {
           _selectedDate = selected;
         });
