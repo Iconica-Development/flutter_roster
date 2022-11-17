@@ -15,6 +15,7 @@ class RosterWidget extends StatefulWidget {
   const RosterWidget({
     required this.blocks,
     this.tableDirection = Axis.vertical,
+    this.size,
     this.highlightedDates = const [],
     this.disabledDates = const [],
     this.initialDate,
@@ -22,6 +23,7 @@ class RosterWidget extends StatefulWidget {
     this.scrollController,
     this.scrollPhysics,
     this.onTapDay,
+    this.tableTopPadding = 0,
     this.startHour = 0,
     this.endHour = 24,
     this.hourDimension = 80,
@@ -62,6 +64,9 @@ class RosterWidget extends StatefulWidget {
   /// Hour at which the timetable ends.
   final int endHour;
 
+  /// The amount of pixels above the timetable
+  final double tableTopPadding;
+
   /// The dimension in pixels of one hour in the timetable.
   final double hourDimension;
 
@@ -74,6 +79,9 @@ class RosterWidget extends StatefulWidget {
   /// The theme used by the roster.
   /// The [TableTheme] used by the timetable is included.
   final RosterTheme theme;
+
+  /// The [Size] of the timetable.
+  final Size? size;
 
   /// The scroll controller to control the scrolling of the timetable.
   final ScrollController? scrollController;
@@ -103,10 +111,7 @@ class _RosterWidgetState extends State<RosterWidget> {
       highlightToday: widget.highlightToday,
       header: widget.header,
       onTapDay: (selected) {
-        if (widget.onTapDay != null) {
-          widget.onTapDay!(selected);
-        }
-
+        widget.onTapDay?.call(selected);
         setState(() {
           _selectedDate = selected;
         });
@@ -114,19 +119,32 @@ class _RosterWidgetState extends State<RosterWidget> {
       disabledDates: widget.disabledDates,
       markedDates: widget.highlightedDates,
       dateTimePickerTheme: widget.theme.timePickerTheme,
-      child: Timetable(
-        tableDirection: widget.tableDirection,
-        scrollPhysics: widget.scrollPhysics,
-        scrollController: widget.scrollController,
-        blockColor: widget.blockColor,
-        blockWidth: widget.blockWidth,
-        hourDimension: widget.hourDimension,
-        startHour: widget.startHour,
-        endHour: widget.endHour,
-        timeBlocks: events,
-        theme: widget.theme.tableTheme,
-        combineBlocks: true,
-        mergeBlocks: false,
+      child: Column(
+        children: [
+          SizedBox(
+            height: widget.tableTopPadding,
+          ),
+          SizedBox(
+            height: (widget.size != null)
+                ? widget.size!.height - widget.tableTopPadding
+                : null,
+            width: (widget.size != null) ? widget.size!.width : null,
+            child: Timetable(
+              tableDirection: widget.tableDirection,
+              scrollPhysics: widget.scrollPhysics,
+              scrollController: widget.scrollController,
+              blockColor: widget.blockColor,
+              blockDimension: widget.blockWidth,
+              hourDimension: widget.hourDimension,
+              startHour: widget.startHour,
+              endHour: widget.endHour,
+              timeBlocks: events,
+              theme: widget.theme.tableTheme,
+              combineBlocks: true,
+              mergeBlocks: false,
+            ),
+          ),
+        ],
       ),
     );
   }
