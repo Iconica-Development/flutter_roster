@@ -142,6 +142,7 @@ class _RosterWidgetState extends State<RosterWidget> {
               theme: widget.theme.tableTheme,
               combineBlocks: true,
               mergeBlocks: false,
+              size: widget.size,
             ),
           ),
         ],
