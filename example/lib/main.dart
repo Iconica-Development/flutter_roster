@@ -20,6 +20,7 @@ class RosterDemo extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: RosterWidget(
+          tableDirection: Axis.horizontal,
           header: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.1,
@@ -38,8 +39,12 @@ class RosterDemo extends StatelessWidget {
               ],
             ),
           ),
-          blockWidth: 50,
+          blockDimension: 50,
           highlightToday: false,
+          size: Size(
+            MediaQuery.of(context).size.width,
+            MediaQuery.of(context).size.height * 0.8,
+          ),
           blocks: [
             RosterEvent(
               start: DateTime.now().subtract(const Duration(hours: 3)),

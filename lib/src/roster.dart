@@ -28,7 +28,7 @@ class RosterWidget extends StatefulWidget {
     this.endHour = 24,
     this.hourDimension = 80,
     this.highlightToday = true,
-    this.blockWidth = 50,
+    this.blockDimension = 50,
     this.blockColor = const Color(0x80FF0000),
     this.theme = const RosterTheme(),
     super.key,
@@ -70,8 +70,8 @@ class RosterWidget extends StatefulWidget {
   /// The dimension in pixels of one hour in the timetable.
   final double hourDimension;
 
-  /// The width of the rosterItem if there is no child
-  final double blockWidth;
+  /// The dimension in pixels of the rosterItem if there is no child
+  final double blockDimension;
 
   /// The color of the rosterItem if there is no child
   final Color blockColor;
@@ -134,7 +134,7 @@ class _RosterWidgetState extends State<RosterWidget> {
               scrollPhysics: widget.scrollPhysics,
               scrollController: widget.scrollController,
               blockColor: widget.blockColor,
-              blockDimension: widget.blockWidth,
+              blockDimension: widget.blockDimension,
               hourDimension: widget.hourDimension,
               startHour: widget.startHour,
               endHour: widget.endHour,
@@ -142,7 +142,12 @@ class _RosterWidgetState extends State<RosterWidget> {
               theme: widget.theme.tableTheme,
               combineBlocks: true,
               mergeBlocks: false,
-              size: widget.size,
+              size: (widget.size != null)
+                  ? Size(
+                      widget.size!.width,
+                      widget.size!.height - widget.tableTopPadding,
+                    )
+                  : null,
             ),
           ),
         ],

@@ -19,7 +19,7 @@ dependencies:
   timetable:
     git:
       url: https://github.com/Iconica-Development/flutter_timetable.git
-      ref: feature/horizontal_variant
+      ref: 1.0.0
 
 dev_dependencies:
   flutter_test:

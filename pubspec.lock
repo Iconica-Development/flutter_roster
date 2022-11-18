@@ -163,7 +163,7 @@ packages:
     description:
       path: "."
       ref: "feature/horizontal_variant"
-      resolved-ref: "6aaf5dc171a0e72ffdca1b817b6f9e6c165fffb6"
+      resolved-ref: f91b1ca66ba4767d9bc0f9915bf140c3df36ed59
       url: "https://github.com/Iconica-Development/flutter_timetable.git"
     source: git
     version: "0.0.2"
