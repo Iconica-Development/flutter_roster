@@ -14,6 +14,8 @@ class RosterWidget extends StatefulWidget {
   /// All styling can be configured through the [RosterTheme] class.
   const RosterWidget({
     required this.blocks,
+    this.tableDirection = Axis.vertical,
+    this.size,
     this.highlightedDates = const [],
     this.disabledDates = const [],
     this.initialDate,
@@ -21,17 +23,21 @@ class RosterWidget extends StatefulWidget {
     this.scrollController,
     this.scrollPhysics,
     this.onTapDay,
+    this.tableTopPadding = 0,
     this.startHour = 0,
     this.endHour = 24,
-    this.hourHeight = 80,
+    this.hourDimension = 80,
     this.highlightToday = true,
-    this.blockWidth = 50,
+    this.blockDimension = 50,
     this.blockColor = const Color(0x80FF0000),
     this.theme = const RosterTheme(),
     super.key,
   });
 
-  /// Header widget that is displayed above the datepicker.
+  /// The [Axis] along which the timetable markings are lined out
+  final Axis tableDirection;
+
+  /// Header widget that is displayed above the datepicker
   final Widget? header;
 
   /// The blocks that are displayed in the roster
@@ -58,11 +64,14 @@ class RosterWidget extends StatefulWidget {
   /// Hour at which the timetable ends.
   final int endHour;
 
-  /// The heigh of one hour in the timetable.
-  final double hourHeight;
+  /// The amount of pixels above the timetable
+  final double tableTopPadding;
 
-  /// The width of the rosterItem if there is no child
-  final double blockWidth;
+  /// The dimension in pixels of one hour in the timetable.
+  final double hourDimension;
+
+  /// The dimension in pixels of the rosterItem if there is no child
+  final double blockDimension;
 
   /// The color of the rosterItem if there is no child
   final Color blockColor;
@@ -70,6 +79,9 @@ class RosterWidget extends StatefulWidget {
   /// The theme used by the roster.
   /// The [TableTheme] used by the timetable is included.
   final RosterTheme theme;
+
+  /// The [Size] of the timetable.
+  final Size? size;
 
   /// The scroll controller to control the scrolling of the timetable.
   final ScrollController? scrollController;
@@ -99,6 +111,7 @@ class _RosterWidgetState extends State<RosterWidget> {
       highlightToday: widget.highlightToday,
       header: widget.header,
       onTapDay: (selected) {
+        widget.onTapDay?.call(selected);
         setState(() {
           _selectedDate = selected;
         });
@@ -106,18 +119,38 @@ class _RosterWidgetState extends State<RosterWidget> {
       disabledDates: widget.disabledDates,
       markedDates: widget.highlightedDates,
       dateTimePickerTheme: widget.theme.timePickerTheme,
-      child: Timetable(
-        scrollPhysics: widget.scrollPhysics,
-        scrollController: widget.scrollController,
-        blockColor: widget.blockColor,
-        blockWidth: widget.blockWidth,
-        hourHeight: widget.hourHeight,
-        startHour: widget.startHour,
-        endHour: widget.endHour,
-        timeBlocks: events,
-        theme: widget.theme.tableTheme,
-        combineBlocks: true,
-        mergeBlocks: false,
+      child: Column(
+        children: [
+          SizedBox(
+            height: widget.tableTopPadding,
+          ),
+          SizedBox(
+            height: (widget.size != null)
+                ? widget.size!.height - widget.tableTopPadding
+                : null,
+            width: (widget.size != null) ? widget.size!.width : null,
+            child: Timetable(
+              tableDirection: widget.tableDirection,
+              scrollPhysics: widget.scrollPhysics,
+              scrollController: widget.scrollController,
+              blockColor: widget.blockColor,
+              blockDimension: widget.blockDimension,
+              hourDimension: widget.hourDimension,
+              startHour: widget.startHour,
+              endHour: widget.endHour,
+              timeBlocks: events,
+              theme: widget.theme.tableTheme,
+              combineBlocks: true,
+              mergeBlocks: false,
+              size: (widget.size != null)
+                  ? Size(
+                      widget.size!.width,
+                      widget.size!.height - widget.tableTopPadding,
+                    )
+                  : null,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -148,6 +181,7 @@ class _RosterWidgetState extends State<RosterWidget> {
                     minute: e.end.minute,
                   ),
             id: e.id ?? 0,
+            childDimension: e.childDimension,
             child: e.content,
           ),
         )

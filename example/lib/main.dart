@@ -12,31 +12,39 @@ void main() {
 class RosterDemo extends StatelessWidget {
   const RosterDemo({Key? key}) : super(key: key);
 
+  static const String teamRoster = 'Team Rooster';
+  static const String personalRoster = 'Persoonlijk rooster';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: RosterWidget(
+          tableDirection: Axis.horizontal,
           header: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.1,
             ),
             child: Row(
               children: [
-                Text(
-                  'Team Rooster',
-                  style: Theme.of(context).textTheme.headline6,
+                const Text(
+                  teamRoster,
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
-                Text(
-                  'Persoonlijk Rooster',
-                  style: Theme.of(context).textTheme.headline6,
+                const Text(
+                  personalRoster,
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
-          blockWidth: 50,
+          blockDimension: 50,
           highlightToday: false,
+          size: Size(
+            MediaQuery.of(context).size.width,
+            MediaQuery.of(context).size.height * 0.8,
+          ),
           blocks: [
             RosterEvent(
               start: DateTime.now().subtract(const Duration(hours: 3)),
@@ -94,6 +102,13 @@ class RosterDemo extends StatelessWidget {
           theme: const RosterTheme(
             tableTheme: TableTheme(
               blockPaddingBetween: 10,
+            ),
+            timePickerTheme: DateTimePickerTheme(
+              barTheme: DateTimePickerBarTheme(
+                barColor: Colors.blue,
+                barOpacity: 1,
+                barHeight: 5,
+              ),
             ),
           ),
         ),
