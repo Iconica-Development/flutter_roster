@@ -1,12 +1,12 @@
-[![pub package](https://img.shields.io/pub/v/[PACKAGE NAME ON PUB].svg)](https://github.com/Iconica-Development) [![Build status](https://github.com/Iconica-Development/flutter_roster)](URL TO GITHUB ACTIONS) [![style: effective dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/tenhobi/effective_dart) 
+[![pub package](https://img.shields.io/pub/v/flutter_roster.svg)](https://github.com/Iconica-Development) [![Build status](https://img.shields.io/github/workflow/status/Iconica-Development/flutter_roster/CI)](https://github.com/Iconica-Development/flutter_roster/actions/new) [![style: effective dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/tenhobi/effective_dart) 
 
-# flutter_roster
+# Flutter Roster
+
 A Flutter package for creating a roster that displays events per day with an included calendar for picking the date. Each event gets its own column except when events have the same time and Id. In that case, they are grouped together in the same column.
 Multiday events are split into multiple columns.
 The underlying datepicker widget supports marking dates and disabling dates.
 
-
-Supports all Flutter platforms.
+![Roster GIF](flutter_roster.gif)
 
 ## Usage
 
