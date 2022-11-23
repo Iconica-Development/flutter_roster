@@ -18,27 +18,32 @@ class RosterDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: RosterWidget(
-          tableDirection: Axis.horizontal,
-          header: Padding(
+      appBar: AppBar(
+        title: const Text('Demo'),
+      ),
+      body: RosterWidget(
+        tableTopPadding: 130,
+        tableDirection: Axis.horizontal,
+        header: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.1,
             ),
-            child: Row(
-              children: [
-                const Text(
-                  teamRoster,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const Spacer(),
-                const Text(
-                  personalRoster,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: const Text('Agenda'),
+            )),
+        blockDimension: 50,
+        highlightToday: false,
+        size: Size(
+          MediaQuery.of(context).size.width,
+          MediaQuery.of(context).size.height * 0.8,
+        ),
+        blocks: [
+          RosterEvent(
+            start: DateTime.now().subtract(const Duration(hours: 3)),
+            end: DateTime.now().add(const Duration(hours: 2)),
           ),
+<<<<<<< HEAD
           childIfEmptyRoster:
               const Text('no elements', style: TextStyle(color: Colors.red)),
           blockDimension: 50,
@@ -47,71 +52,65 @@ class RosterDemo extends StatelessWidget {
           size: Size(
             MediaQuery.of(context).size.width,
             MediaQuery.of(context).size.height * 0.8,
+=======
+          RosterEvent(
+            start: DateTime.now().subtract(const Duration(hours: 2)),
+            end: DateTime.now().add(const Duration(hours: 3)),
+>>>>>>> cb68166 (added Gif, updated README, added Github Actions)
           ),
-          blocks: [
-            RosterEvent(
-              start: DateTime.now().subtract(const Duration(hours: 3)),
-              end: DateTime.now().add(const Duration(hours: 2)),
-            ),
-            RosterEvent(
-              start: DateTime.now().subtract(const Duration(hours: 2)),
-              end: DateTime.now().add(const Duration(hours: 3)),
-            ),
-            RosterEvent(
-              start: DateTime.now().subtract(const Duration(hours: 1)),
-              end: DateTime.now().add(const Duration(hours: 4)),
-            ),
-            RosterEvent(
-              start: DateTime.now().add(const Duration(hours: 3)),
-              end: DateTime.now().add(const Duration(hours: 4)),
-              id: 4,
-              content: const Text('event 4'),
-            ),
-            RosterEvent(
-              start: DateTime.now().add(const Duration(hours: 3)),
-              end: DateTime.now().add(const Duration(hours: 4)),
-              id: 4,
-              content: const Text('event 5'),
-            ),
-            RosterEvent(
-              start: DateTime.now().add(const Duration(hours: 3)),
-              end: DateTime.now().add(const Duration(hours: 4)),
-              id: 4,
-              content: const Text('event 6'),
-            ),
-            RosterEvent(
-              start: DateTime.now().add(const Duration(days: 1)),
-              end: DateTime.now()
-                  .add(const Duration(days: 1))
-                  .add(const Duration(hours: 2)),
-            ),
-            RosterEvent(
-              start: DateTime.now().subtract(const Duration(hours: 2)),
-              end: DateTime.now().add(const Duration(hours: 1)),
-            ),
-            RosterEvent(
-              start: DateTime.now().add(const Duration(days: 2)),
-              end: DateTime.now().add(const Duration(days: 3)),
-            ),
-          ],
-          disabledDates: [
-            // yesterday
-            DateTime.now().subtract(const Duration(days: 1)),
-          ],
-          highlightedDates: [
-            // tomorrow
-            DateTime.now().add(const Duration(days: 1)),
-          ],
-          theme: const RosterTheme(
-            tableTheme: TableTheme(
-              blockPaddingBetween: 10,
-            ),
-            timePickerTheme: DateTimePickerTheme(
-              barTheme: DateTimePickerBarTheme(
-                barColor: Colors.blue,
-                barOpacity: 1,
-                barHeight: 5,
-              ),
+          RosterEvent(
+            start: DateTime.now().subtract(const Duration(hours: 1)),
+            end: DateTime.now().add(const Duration(hours: 4)),
+          ),
+          RosterEvent(
+            start: DateTime.now().add(const Duration(hours: 3)),
+            end: DateTime.now().add(const Duration(hours: 4)),
+            id: 4,
+            content: const Text('event 4'),
+          ),
+          RosterEvent(
+            start: DateTime.now().add(const Duration(hours: 3)),
+            end: DateTime.now().add(const Duration(hours: 4)),
+            id: 4,
+            content: const Text('event 5'),
+          ),
+          RosterEvent(
+            start: DateTime.now().add(const Duration(hours: 3)),
+            end: DateTime.now().add(const Duration(hours: 4)),
+            id: 4,
+            content: const Text('event 6'),
+          ),
+          RosterEvent(
+            start: DateTime.now().add(const Duration(days: 1)),
+            end: DateTime.now()
+                .add(const Duration(days: 1))
+                .add(const Duration(hours: 2)),
+          ),
+          RosterEvent(
+            start: DateTime.now().subtract(const Duration(hours: 2)),
+            end: DateTime.now().add(const Duration(hours: 1)),
+          ),
+          RosterEvent(
+            start: DateTime.now().add(const Duration(days: 2)),
+            end: DateTime.now().add(const Duration(days: 3)),
+          ),
+        ],
+        disabledDates: [
+          // yesterday
+          DateTime.now().subtract(const Duration(days: 1)),
+        ],
+        highlightedDates: [
+          // tomorrow
+          DateTime.now().add(const Duration(days: 1)),
+        ],
+        theme: const RosterTheme(
+          tableTheme: TableTheme(
+            blockPaddingBetween: 10,
+          ),
+          timePickerTheme: DateTimePickerTheme(
+            barTheme: DateTimePickerBarTheme(
+              barOpacity: 1,
+              barHeight: 5,
             ),
           ),
         ),
