@@ -39,8 +39,11 @@ class RosterDemo extends StatelessWidget {
               ],
             ),
           ),
+          childIfEmptyRoster:
+              const Text('no elements', style: TextStyle(color: Colors.red)),
           blockDimension: 50,
           highlightToday: false,
+          tableTopPadding: 120,
           size: Size(
             MediaQuery.of(context).size.width,
             MediaQuery.of(context).size.height * 0.8,

@@ -52,11 +52,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "1.2.0"
-      resolved-ref: "1bb8dd5da3db9243ce9db87283cae3ffe2bac221"
+      ref: "2.1.0"
+      resolved-ref: bd448daacc1ad1a2072157ea3d38444a1c95fedc
       url: "https://github.com/Iconica-Development/flutter_date_time_picker.git"
     source: git
-    version: "0.0.1"
+    version: "2.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -162,8 +162,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "feature/horizontal_variant"
-      resolved-ref: f91b1ca66ba4767d9bc0f9915bf140c3df36ed59
+      ref: "1.0.0"
+      resolved-ref: dada4ea9a440bcfe58a235dfd93798e4d5ce857a
       url: "https://github.com/Iconica-Development/flutter_timetable.git"
     source: git
     version: "0.0.2"
