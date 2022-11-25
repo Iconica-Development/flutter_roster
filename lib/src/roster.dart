@@ -19,15 +19,19 @@ class RosterWidget extends StatefulWidget {
     this.highlightedDates = const [],
     this.disabledDates = const [],
     this.initialDate,
+    this.alwaysUse24HourFormat,
     this.header,
+    this.childIfEmptyRoster,
     this.scrollController,
     this.scrollPhysics,
     this.onTapDay,
     this.tableTopPadding = 0,
+    this.datePickerExpansion = 0,
     this.startHour = 0,
     this.endHour = 24,
     this.hourDimension = 80,
     this.highlightToday = true,
+    this.updateEmptyChildPosition = true,
     this.blockDimension = 50,
     this.blockColor = const Color(0x80FF0000),
     this.theme = const RosterTheme(),
@@ -39,6 +43,13 @@ class RosterWidget extends StatefulWidget {
 
   /// Header widget that is displayed above the datepicker
   final Widget? header;
+
+  /// The Widget displayed instead of the timetable when no events are available
+  final Widget? childIfEmptyRoster;
+
+  /// Whether to change the position of the Empty Child Widget
+  /// when the datepicker is opened
+  final bool updateEmptyChildPosition;
 
   /// The blocks that are displayed in the roster
   final List<RosterEvent> blocks;
@@ -66,6 +77,13 @@ class RosterWidget extends StatefulWidget {
 
   /// The amount of pixels above the timetable
   final double tableTopPadding;
+
+  /// The extra height of the datePicker when it is expanded
+  final double datePickerExpansion;
+
+  /// [bool] to set the clock on [TimePickerDialog] to a fixed 24 format.
+  /// By default this gets determined by the settings on the user device.
+  final bool? alwaysUse24HourFormat;
 
   /// The dimension in pixels of one hour in the timetable.
   final double hourDimension;
@@ -95,6 +113,7 @@ class RosterWidget extends StatefulWidget {
 
 class _RosterWidgetState extends State<RosterWidget> {
   late DateTime _selectedDate;
+  double _scrollOffset = 0.0;
 
   @override
   void initState() {
@@ -105,7 +124,8 @@ class _RosterWidgetState extends State<RosterWidget> {
   @override
   Widget build(BuildContext context) {
     var events = _filterEventsOnDay(widget.blocks, _selectedDate);
-    return DateTimePicker(
+    return DragDownDateTimePicker(
+      alwaysUse24HourFormat: widget.alwaysUse24HourFormat,
       initialDate: _selectedDate,
       pickTime: false,
       highlightToday: widget.highlightToday,
@@ -115,6 +135,13 @@ class _RosterWidgetState extends State<RosterWidget> {
         setState(() {
           _selectedDate = selected;
         });
+      },
+      onTimerPickerSheetChange: (p0) {
+        if (widget.updateEmptyChildPosition) {
+          setState(() {
+            _scrollOffset = p0 - widget.tableTopPadding;
+          });
+        }
       },
       disabledDates: widget.disabledDates,
       markedDates: widget.highlightedDates,
@@ -129,26 +156,38 @@ class _RosterWidgetState extends State<RosterWidget> {
                 ? widget.size!.height - widget.tableTopPadding
                 : null,
             width: (widget.size != null) ? widget.size!.width : null,
-            child: Timetable(
-              tableDirection: widget.tableDirection,
-              scrollPhysics: widget.scrollPhysics,
-              scrollController: widget.scrollController,
-              blockColor: widget.blockColor,
-              blockDimension: widget.blockDimension,
-              hourDimension: widget.hourDimension,
-              startHour: widget.startHour,
-              endHour: widget.endHour,
-              timeBlocks: events,
-              theme: widget.theme.tableTheme,
-              combineBlocks: true,
-              mergeBlocks: false,
-              size: (widget.size != null)
-                  ? Size(
-                      widget.size!.width,
-                      widget.size!.height - widget.tableTopPadding,
-                    )
-                  : null,
-            ),
+            child: (widget.childIfEmptyRoster != null && events.isEmpty)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // add empty space between the top of the widget
+                      //and the child if the datepicker is expanded
+                      SizedBox(
+                        height: _scrollOffset,
+                      ),
+                      widget.childIfEmptyRoster!,
+                    ],
+                  )
+                : Timetable(
+                    tableDirection: widget.tableDirection,
+                    scrollPhysics: widget.scrollPhysics,
+                    scrollController: widget.scrollController,
+                    blockColor: widget.blockColor,
+                    blockDimension: widget.blockDimension,
+                    hourDimension: widget.hourDimension,
+                    startHour: widget.startHour,
+                    endHour: widget.endHour,
+                    timeBlocks: events,
+                    theme: widget.theme.tableTheme,
+                    combineBlocks: true,
+                    mergeBlocks: false,
+                    size: (widget.size != null)
+                        ? Size(
+                            widget.size!.width,
+                            widget.size!.height - widget.tableTopPadding,
+                          )
+                        : null,
+                  ),
           ),
         ],
       ),
