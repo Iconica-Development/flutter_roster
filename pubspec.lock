@@ -52,11 +52,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "2.1.0"
-      resolved-ref: bd448daacc1ad1a2072157ea3d38444a1c95fedc
+      ref: "2.2.0"
+      resolved-ref: ad430d6bf1fb7c6bfdca2b7d69774399bcd044f9
       url: "https://github.com/Iconica-Development/flutter_date_time_picker.git"
     source: git
-    version: "2.1.0"
+    version: "2.2.0"
   flutter_lints:
     dependency: "direct dev"
     description:
