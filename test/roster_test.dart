@@ -13,6 +13,7 @@ void main() {
       const MaterialApp(
         home: Scaffold(
           body: RosterWidget(
+            size: Size(500, 500),
             header: Text('Roster'),
             blocks: [],
           ),
@@ -30,6 +31,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: RosterWidget(
+            size: const Size(500, 500),
             blocks: [
               RosterEvent(
                 start: DateTime.now().subtract(const Duration(days: 3)),
@@ -66,6 +68,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: RosterWidget(
+            size: const Size(500, 500),
             initialDate: DateTime.now(),
             blocks: [
               RosterEvent(
