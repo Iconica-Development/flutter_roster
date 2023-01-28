@@ -28,9 +28,9 @@ class RosterDemo extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.1,
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: const Text('Agenda'),
+            child: const Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Text('Agenda'),
             )),
         blockDimension: 50,
         highlightToday: false,
@@ -43,20 +43,9 @@ class RosterDemo extends StatelessWidget {
             start: DateTime.now().subtract(const Duration(hours: 3)),
             end: DateTime.now().add(const Duration(hours: 2)),
           ),
-<<<<<<< HEAD
-          childIfEmptyRoster:
-              const Text('no elements', style: TextStyle(color: Colors.red)),
-          blockDimension: 50,
-          highlightToday: false,
-          tableTopPadding: 120,
-          size: Size(
-            MediaQuery.of(context).size.width,
-            MediaQuery.of(context).size.height * 0.8,
-=======
           RosterEvent(
             start: DateTime.now().subtract(const Duration(hours: 2)),
             end: DateTime.now().add(const Duration(hours: 3)),
->>>>>>> cb68166 (added Gif, updated README, added Github Actions)
           ),
           RosterEvent(
             start: DateTime.now().subtract(const Duration(hours: 1)),

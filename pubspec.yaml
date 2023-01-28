@@ -1,6 +1,6 @@
 name: flutter_roster
 description: Roster widget with an underlying timetable included
-version: 1.1.1
+version: 2.0.0
 homepage: https://github.com/Iconica-Development/flutter_roster
 
 publish_to: none
@@ -15,7 +15,7 @@ dependencies:
   flutter_date_time_picker:
     git:
       url: https://github.com/Iconica-Development/flutter_date_time_picker.git
-      ref: 2.2.4
+      ref: 3.0.0
   timetable:
     git:
       url: https://github.com/Iconica-Development/flutter_timetable.git

@@ -57,10 +57,12 @@ packages:
   flutter_date_time_picker:
     dependency: "direct main"
     description:
-      path: "../flutter_date_time_picker"
-      relative: true
-    source: path
-    version: "2.2.0"
+      path: "."
+      ref: "3.0.0"
+      resolved-ref: "315c24729a7402e85ebc6e832395977bfdfcecc9"
+      url: "https://github.com/Iconica-Development/flutter_date_time_picker.git"
+    source: git
+    version: "3.0.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -201,5 +203,5 @@ packages:
     source: hosted
     version: "2.1.4"
 sdks:
-  dart: ">=2.18.0 <4.0.0"
+  dart: ">=2.18.0 <3.0.0"
   flutter: ">=2.0.0"
