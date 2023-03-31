@@ -1,3 +1,7 @@
+## [2.0.0] - 31 March 2023
+
+- Updated flutter_date_time_picker version to version 3.0.0
+
 ## [1.1.1] - 8 December 2022
 
 - Updated flutter_date_time_picker version
