@@ -1,6 +1,6 @@
 name: flutter_roster
 description: Roster widget with an underlying timetable included
-version: 1.1.2
+version: 2.0.1
 homepage: https://github.com/Iconica-Development/flutter_roster
 
 publish_to: none
