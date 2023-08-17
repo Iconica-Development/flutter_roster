@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_date_time_picker/flutter_date_time_picker.dart';
 import 'package:flutter_roster/src/models/roster_event.dart';
 import 'package:flutter_roster/src/models/roster_theme.dart';
-import 'package:timetable/timetable.dart';
+import 'package:flutter_timetable/timetable.dart';
 
 class RosterWidget extends StatefulWidget {
   /// [RosterWidget] is a widget that displays a timetable with events.
@@ -22,6 +22,7 @@ class RosterWidget extends StatefulWidget {
     this.alwaysUse24HourFormat,
     this.header,
     this.childIfEmptyRoster,
+    this.initialScrollTime,
     this.scrollController,
     this.scrollPhysics,
     this.onTapDay,
@@ -101,6 +102,9 @@ class RosterWidget extends StatefulWidget {
   /// The [Size] of the timetable.
   final Size? size;
 
+  /// The initial time to scroll to if there are no rosterevents. If nothing is provided it will scroll to the current time or to the first block if there is one.
+  final TimeOfDay? initialScrollTime;
+
   /// The scroll controller to control the scrolling of the timetable.
   final ScrollController? scrollController;
 
@@ -170,6 +174,7 @@ class _RosterWidgetState extends State<RosterWidget> {
                   )
                 : Timetable(
                     tableDirection: widget.tableDirection,
+                    initialScrollTime: widget.initialScrollTime,
                     scrollPhysics: widget.scrollPhysics,
                     scrollController: widget.scrollController,
                     blockColor: widget.blockColor,
