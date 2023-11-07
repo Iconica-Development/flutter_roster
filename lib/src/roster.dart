@@ -36,6 +36,9 @@ class RosterWidget extends StatefulWidget {
     this.blockDimension = 50,
     this.blockColor = const Color(0x80FF0000),
     this.theme = const RosterTheme(),
+    this.enableBorderScroll = false,
+    this.scrollTriggerOffset = 120,
+    this.scrollJumpToOffset = 115,
     super.key,
   });
 
@@ -65,7 +68,7 @@ class RosterWidget extends StatefulWidget {
   final DateTime? initialDate;
 
   /// Function called when the user taps on a day in the datepicker.
-  final Function(DateTime)? onTapDay;
+  final Future<void> Function(DateTime)? onTapDay;
 
   /// Whether to highlight the current date in the roster.
   final bool highlightToday;
@@ -111,35 +114,58 @@ class RosterWidget extends StatefulWidget {
   /// The scroll physics used for the SinglechildScrollView.
   final ScrollPhysics? scrollPhysics;
 
+  /// Enable the ability to scroll to the next day.
+  final bool enableBorderScroll;
+
+  /// The offset which trigger the jump to either the previous or next page. Can't be lower then [scrollJumpToOffset].
+  final double scrollTriggerOffset;
+
+  /// When the jump is triggered this offset will be jumped outside of the min or max offset. Can't be higher then [scrollTriggerOffset].
+  final double scrollJumpToOffset;
+
   @override
   State<RosterWidget> createState() => _RosterWidgetState();
 }
 
 class _RosterWidgetState extends State<RosterWidget> {
-  late DateTime _selectedDate;
+  late DateTime _selectedDate = widget.initialDate ?? DateTime.now();
   double _scrollOffset = 0.0;
 
-  @override
-  void initState() {
-    super.initState();
-    _selectedDate = widget.initialDate ?? DateTime.now();
-  }
+  late var timeTableKey = ValueKey(widget.blocks.length);
+
+  late final dateTimePickerController = DateTimePickerController(
+    onTapDayCallBack: (selected) async {
+      await widget.onTapDay?.call(selected);
+      setState(() {
+        _selectedDate = selected;
+        timeTableKey = ValueKey(widget.blocks.length);
+      });
+    },
+    onBorderScrollCallback: widget.enableBorderScroll
+        ? (selected) {
+            widget.onTapDay?.call(selected);
+            setState(() {
+              _selectedDate = selected;
+            });
+          }
+        : null,
+    initialDate: widget.initialDate ?? DateTime.now(),
+  );
 
   @override
   Widget build(BuildContext context) {
     var events = _filterEventsOnDay(widget.blocks, _selectedDate);
     return DragDownDateTimePicker(
-      alwaysUse24HourFormat: widget.alwaysUse24HourFormat,
-      initialDate: _selectedDate,
-      pickTime: false,
-      highlightToday: widget.highlightToday,
-      header: widget.header,
-      onTapDay: (selected) {
-        widget.onTapDay?.call(selected);
-        setState(() {
-          _selectedDate = selected;
-        });
-      },
+      controller: dateTimePickerController,
+      configuration: DateTimePickerConfiguration(
+        highlightToday: widget.highlightToday,
+        alwaysUse24HourFormat: widget.alwaysUse24HourFormat,
+        pickTime: false,
+        theme: widget.theme.timePickerTheme,
+        header: widget.header,
+        markedDates: widget.highlightedDates,
+        disabledDates: widget.disabledDates,
+      ),
       onTimerPickerSheetChange: (p0) {
         if (widget.updateEmptyChildPosition) {
           setState(() {
@@ -147,9 +173,6 @@ class _RosterWidgetState extends State<RosterWidget> {
           });
         }
       },
-      disabledDates: widget.disabledDates,
-      markedDates: widget.highlightedDates,
-      dateTimePickerTheme: widget.theme.timePickerTheme,
       child: Column(
         children: [
           SizedBox(
@@ -173,6 +196,7 @@ class _RosterWidgetState extends State<RosterWidget> {
                     ],
                   )
                 : Timetable(
+                    key: timeTableKey,
                     tableDirection: widget.tableDirection,
                     initialScrollTime: widget.initialScrollTime,
                     scrollPhysics: widget.scrollPhysics,
@@ -186,6 +210,30 @@ class _RosterWidgetState extends State<RosterWidget> {
                     theme: widget.theme.tableTheme,
                     combineBlocks: true,
                     mergeBlocks: false,
+                    scrollTriggerOffset: widget.scrollTriggerOffset,
+                    scrollJumpToOffset: widget.scrollJumpToOffset,
+                    onOverScroll: widget.enableBorderScroll
+                        ? () {
+                            setState(() {
+                              _selectedDate =
+                                  _selectedDate.add(const Duration(days: 1));
+                            });
+
+                            dateTimePickerController
+                                .onBorderScroll(_selectedDate);
+                          }
+                        : null,
+                    onUnderScroll: widget.enableBorderScroll
+                        ? () {
+                            setState(() {
+                              _selectedDate = _selectedDate
+                                  .subtract(const Duration(days: 1));
+                            });
+
+                            dateTimePickerController
+                                .onBorderScroll(_selectedDate);
+                          }
+                        : null,
                     size: (widget.size != null)
                         ? Size(
                             widget.size!.width,
