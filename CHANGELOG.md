@@ -1,3 +1,7 @@
+## [2.4.0] - 7 November 2023
+
+- Added the borderscroll feature. When scrolling to a given offset the next day or previous day will be shown.
+
 ## [2.3.0] - 26 October 2023
 
 - Updated flutter_date_time_picker to version 3.3.3

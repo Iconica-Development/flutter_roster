@@ -22,6 +22,7 @@ class RosterDemo extends StatelessWidget {
         title: const Text('Demo'),
       ),
       body: RosterWidget(
+        enableBorderScroll: true,
         tableTopPadding: 130,
         tableDirection: Axis.horizontal,
         header: Padding(
