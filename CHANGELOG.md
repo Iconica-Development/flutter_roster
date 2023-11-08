@@ -1,3 +1,7 @@
+## [2.5.0] - 8 November 2023
+
+- Added the option for setting an offset for the hours so that the first hour is not 00:00 but 08:00 for example and the last hour can be after 24:00.
+
 ## [2.4.0] - 7 November 2023
 
 - Added the borderscroll feature. When scrolling to a given offset the next day or previous day will be shown.
