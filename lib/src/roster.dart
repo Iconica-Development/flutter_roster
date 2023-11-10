@@ -28,6 +28,7 @@ class RosterWidget extends StatefulWidget {
     this.onTapDay,
     this.tableTopPadding = 0,
     this.datePickerExpansion = 0,
+    this.hoursOffset = 0,
     this.startHour = 0,
     this.endHour = 24,
     this.hourDimension = 80,
@@ -78,6 +79,10 @@ class RosterWidget extends StatefulWidget {
 
   /// Hour at which the timetable ends.
   final int endHour;
+
+  /// The time offset to increase all hour labels with
+  /// this is used to make the timetable start at a different time and go past midnight.
+  final int hoursOffset;
 
   /// The amount of pixels above the timetable
   final double tableTopPadding;
@@ -204,6 +209,7 @@ class _RosterWidgetState extends State<RosterWidget> {
                     blockColor: widget.blockColor,
                     blockDimension: widget.blockDimension,
                     hourDimension: widget.hourDimension,
+                    hoursOffset: widget.hoursOffset,
                     startHour: widget.startHour,
                     endHour: widget.endHour,
                     timeBlocks: events,
