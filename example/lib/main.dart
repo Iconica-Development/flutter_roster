@@ -24,6 +24,7 @@ class RosterDemo extends StatelessWidget {
       body: RosterWidget(
         enableBorderScroll: true,
         tableTopPadding: 130,
+        sortByIdAscending: true,
         tableDirection: Axis.horizontal,
         header: Padding(
             padding: EdgeInsets.symmetric(

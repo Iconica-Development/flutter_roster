@@ -37,6 +37,7 @@ class RosterWidget extends StatefulWidget {
     this.blockDimension = 50,
     this.blockColor = const Color(0x80FF0000),
     this.theme = const RosterTheme(),
+    this.sortByIdAscending = false,
     this.enableBorderScroll = false,
     this.scrollTriggerOffset = 120,
     this.scrollJumpToOffset = 115,
@@ -93,6 +94,9 @@ class RosterWidget extends StatefulWidget {
   /// [bool] to set the clock on [TimePickerDialog] to a fixed 24 format.
   /// By default this gets determined by the settings on the user device.
   final bool? alwaysUse24HourFormat;
+
+  /// Whether or not to sort the events by their ID in ascending order.
+  final bool sortByIdAscending;
 
   /// The dimension in pixels of one hour in the timetable.
   final double hourDimension;
@@ -216,6 +220,7 @@ class _RosterWidgetState extends State<RosterWidget> {
                     theme: widget.theme.tableTheme,
                     combineBlocks: true,
                     mergeBlocks: false,
+                    sortByIdAscending: widget.sortByIdAscending,
                     scrollTriggerOffset: widget.scrollTriggerOffset,
                     scrollJumpToOffset: widget.scrollJumpToOffset,
                     onOverScroll: widget.enableBorderScroll
