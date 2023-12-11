@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_date_time_picker/flutter_date_time_picker.dart';
 import 'package:flutter_roster/src/models/roster_event.dart';
 import 'package:flutter_roster/src/models/roster_theme.dart';
-import 'package:flutter_timetable/timetable.dart';
+import 'package:flutter_timetable_view/flutter_timetable_view.dart';
 
 class RosterWidget extends StatefulWidget {
   /// [RosterWidget] is a widget that displays a timetable with events.
@@ -38,6 +38,7 @@ class RosterWidget extends StatefulWidget {
     this.blockColor = const Color(0x80FF0000),
     this.theme = const RosterTheme(),
     this.sortByIdAscending = false,
+    this.sortByStartTime = false,
     this.enableBorderScroll = false,
     this.scrollTriggerOffset = 120,
     this.scrollJumpToOffset = 115,
@@ -97,6 +98,9 @@ class RosterWidget extends StatefulWidget {
 
   /// Whether or not to sort the events by their ID in ascending order.
   final bool sortByIdAscending;
+
+  /// Whether or not to sort blocks by their StartTime.
+  final bool sortByStartTime;
 
   /// The dimension in pixels of one hour in the timetable.
   final double hourDimension;
@@ -221,6 +225,7 @@ class _RosterWidgetState extends State<RosterWidget> {
                     combineBlocks: true,
                     mergeBlocks: false,
                     sortByIdAscending: widget.sortByIdAscending,
+                    sortByStartTime: widget.sortByStartTime,
                     scrollTriggerOffset: widget.scrollTriggerOffset,
                     scrollJumpToOffset: widget.scrollJumpToOffset,
                     onOverScroll: widget.enableBorderScroll

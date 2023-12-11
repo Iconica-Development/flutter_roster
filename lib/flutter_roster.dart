@@ -12,4 +12,4 @@ export 'package:flutter_roster/src/models/roster_event.dart';
 export 'package:flutter_roster/src/models/roster_theme.dart';
 export 'package:flutter_roster/src/roster.dart';
 
-export 'package:flutter_timetable/timetable.dart';
+export 'package:flutter_timetable_view/flutter_timetable_view.dart';

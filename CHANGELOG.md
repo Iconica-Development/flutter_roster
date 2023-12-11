@@ -1,3 +1,7 @@
+## [3.0.0] - 11 December 2023
+
+- Updated flutter_timetable to version 2.0.0
+
 ## [2.6.0] - 13 November 2023
 
 - Add the option for sorting the roster events by their id.
